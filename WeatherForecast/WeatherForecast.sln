@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RequestInterceptor", "Reque
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestInterceptor", "RequestInterceptor\RequestInterceptor.csproj", "{E9316F7E-DA17-43BB-85BF-93747A023F26}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{C1FD61A0-237C-4751-A1EC-CE30D05145FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{B25BBCA8-1991-4108-AD5E-B538D87D9A4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,10 @@ Global
 		{E9316F7E-DA17-43BB-85BF-93747A023F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9316F7E-DA17-43BB-85BF-93747A023F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9316F7E-DA17-43BB-85BF-93747A023F26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B25BBCA8-1991-4108-AD5E-B538D87D9A4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B25BBCA8-1991-4108-AD5E-B538D87D9A4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B25BBCA8-1991-4108-AD5E-B538D87D9A4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B25BBCA8-1991-4108-AD5E-B538D87D9A4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +58,7 @@ Global
 		{7E166B6A-D9C6-41B1-AFDE-15931B59F256} = {F11C461D-FE83-408A-B559-8DC0682E4AFA}
 		{AA5C5B97-CE55-4B63-9D5B-81AE2361A3BB} = {AB4017CA-40C7-41DA-ACDE-8EA992D642CA}
 		{E9316F7E-DA17-43BB-85BF-93747A023F26} = {D8E79B87-414E-4FA1-94C8-66376C2A2794}
+		{B25BBCA8-1991-4108-AD5E-B538D87D9A4D} = {C1FD61A0-237C-4751-A1EC-CE30D05145FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D8BDC44-C9EE-40E1-8162-F953E5A9BC26}
