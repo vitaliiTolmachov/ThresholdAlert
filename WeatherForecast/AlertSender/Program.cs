@@ -1,5 +1,4 @@
 ﻿using Azure.Messaging.ServiceBus;
-using System.Diagnostics;
 
 namespace AlertSender
 {
@@ -21,9 +20,9 @@ namespace AlertSender
         // handle received messages
         static async Task MessageHandler(ProcessMessageEventArgs args)
         {
-            //TODO: Add email sender
-            string body = args.Message.Body.ToString();
-            Console.WriteLine($"Received: {body}");
+            string hostName = args.Message.Body.ToString();
+            var mailSender = new MailSender();
+            mailSender.SendAlert(hostName);
 
             // complete the message. message is deleted from the queue. 
             await args.CompleteMessageAsync(args.Message);

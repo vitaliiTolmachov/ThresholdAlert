@@ -1,6 +1,4 @@
-﻿using Azure.Messaging.ServiceBus;
-using DataAccess;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace RequestInterceptor
 {
