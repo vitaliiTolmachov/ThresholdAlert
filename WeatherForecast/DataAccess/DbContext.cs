@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class AppDbContext : DbContext
+    public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
+        public DbContext(DbContextOptions<DbContext> options)
             : base(options)
         {
         }
@@ -24,7 +24,7 @@ namespace DataAccess
 
             IConfiguration Configuration = new ConfigurationBuilder()
                 .SetBasePath(Path.GetDirectoryName(filePath))
-                .AddJsonFile("appSettings.json")
+                .AddJsonFile("dbSettings.json")
                 .Build();
 
             Configuration.GetConnectionString("db");
@@ -33,10 +33,11 @@ namespace DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            var hostName = "localhost:6054";
             var threshold = new Threshold
             {
                 ThresholdId = 1,
-                HostName = "http://localhost:6054",
+                HostName = hostName,
                 MaxCalls = 10,
                 NotificationLevel = 50
             };
@@ -45,7 +46,7 @@ namespace DataAccess
                 new HostActivity
                 {
                     HostActivityId = 1,
-                    HostName = "http://localhost:6054",
+                    HostName = hostName,
                     CallsMade = 0,
                     Month = 9,
                     Year = 2022,
@@ -54,7 +55,7 @@ namespace DataAccess
                 new HostActivity
                 {
                     HostActivityId = 2,
-                    HostName = "http://localhost:6054",
+                    HostName = hostName,
                     CallsMade = 0,
                     Month = 10,
                     Year = 2022,

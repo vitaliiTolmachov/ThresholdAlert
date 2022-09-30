@@ -1,26 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace DataAccess.Extension
 {
     public static class ServiceCollectionExtension
     {
         public static IServiceCollection RegisterDbContext(
-            this IServiceCollection services,
-            IConfiguration Configuration)
+            this IServiceCollection services)
         {
-            //access the appsetting json file in your WebApplication File
+            //string filePath = (new Uri(Assembly.GetExecutingAssembly().CodeBase)).AbsolutePath;
+            string filePath = new Uri(Assembly.GetAssembly(typeof(DbContext)).CodeBase).AbsolutePath;
 
-            string filePath = Directory.GetCurrentDirectory();
-
-            Configuration = new ConfigurationBuilder()
+            var Configuration = new ConfigurationBuilder()
                 .SetBasePath(Path.GetDirectoryName(filePath))
-                .AddJsonFile("appSettings.json")
+                .AddJsonFile("dbSettings.json")
                 .Build();
 
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("dbConnection")));
+            services.AddDbContext<DbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("db")));
             return services;
         }
 

@@ -3,18 +3,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace DataAccess.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
-    [Migration("20220930170402_Initial")]
-    partial class Initial
+    [DbContext(typeof(DbContext))]
+    partial class DbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,7 +56,7 @@ namespace DataAccess.Migrations
                         {
                             HostActivityId = 1L,
                             CallsMade = 0L,
-                            HostName = "http://localhost:6054",
+                            HostName = "localhost:6054",
                             Month = 9L,
                             ThresholdId = 1L,
                             Year = 2022L
@@ -67,7 +65,7 @@ namespace DataAccess.Migrations
                         {
                             HostActivityId = 2L,
                             CallsMade = 0L,
-                            HostName = "http://localhost:6054",
+                            HostName = "localhost:6054",
                             Month = 10L,
                             ThresholdId = 1L,
                             Year = 2022L
@@ -100,7 +98,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ThresholdId = 1L,
-                            HostName = "http://localhost:6054",
+                            HostName = "localhost:6054",
                             MaxCalls = 10L,
                             NotificationLevel = 50
                         });

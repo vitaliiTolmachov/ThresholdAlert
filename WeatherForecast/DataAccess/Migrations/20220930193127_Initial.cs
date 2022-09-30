@@ -49,17 +49,17 @@ namespace DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Thresholds",
                 columns: new[] { "ThresholdId", "HostName", "MaxCalls", "NotificationLevel" },
-                values: new object[] { 1L, "http://localhost:6054", 10L, 50 });
+                values: new object[] { 1L, "localhost:6054", 10L, 50 });
 
             migrationBuilder.InsertData(
                 table: "HostActivities",
                 columns: new[] { "HostActivityId", "CallsMade", "HostName", "Month", "ThresholdId", "Year" },
-                values: new object[] { 1L, 0L, "http://localhost:6054", 9L, 1L, 2022L });
+                values: new object[] { 1L, 0L, "localhost:6054", 9L, 1L, 2022L });
 
             migrationBuilder.InsertData(
                 table: "HostActivities",
                 columns: new[] { "HostActivityId", "CallsMade", "HostName", "Month", "ThresholdId", "Year" },
-                values: new object[] { 2L, 0L, "http://localhost:6054", 10L, 1L, 2022L });
+                values: new object[] { 2L, 0L, "localhost:6054", 10L, 1L, 2022L });
 
             migrationBuilder.CreateIndex(
                 name: "IX_HostActivities_ThresholdId",

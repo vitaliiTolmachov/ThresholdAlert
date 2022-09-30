@@ -10,35 +10,35 @@ using Microsoft.Extensions.Configuration;
 
 namespace DataAccess
 {
-    public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    public class DbContextFactory : IDesignTimeDbContextFactory<DbContext>
     {
-        public AppDbContextFactory()
+        public DbContextFactory()
         {
 
         }
 
         private readonly IConfiguration Configuration;
 
-        public AppDbContextFactory(IConfiguration configuration)
+        public DbContextFactory(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public AppDbContext CreateDbContext(string[] args)
+        public DbContext CreateDbContext(string[] args)
         {
 
             string filePath = (new Uri(Assembly.GetExecutingAssembly().CodeBase)).AbsolutePath;
 
             IConfiguration Configuration = new ConfigurationBuilder()
                 .SetBasePath(Path.GetDirectoryName(filePath))
-                .AddJsonFile("appSettings.json")
+                .AddJsonFile("dbSettings.json")
                 .Build();
 
 
-            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<DbContext>();
             optionsBuilder.UseSqlServer(Configuration.GetConnectionString("db"));
 
-            return new AppDbContext(optionsBuilder.Options);
+            return new DbContext(optionsBuilder.Options);
         }
     }
 }

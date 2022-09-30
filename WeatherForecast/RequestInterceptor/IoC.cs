@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Azure.Messaging.ServiceBus;
+using DataAccess.Extension;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,6 +27,8 @@ namespace RequestInterceptor
                 return new ServiceBusClient(connectionString);
 
             });
+            services.AddScoped<IAlertService, AlertService>();
+            services.RegisterDbContext();
             return services;
         }
 
