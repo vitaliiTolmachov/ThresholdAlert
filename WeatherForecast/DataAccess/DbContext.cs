@@ -1,4 +1,6 @@
 ﻿using DataAccess.Entities;
+using DataAccess.Entities.Configurations;
+using DataAccess.Extension;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
@@ -21,48 +23,15 @@ namespace DataAccess
                 .AddJsonFile("dbSettings.json")
                 .Build();
 
-            Configuration.GetConnectionString("db");
             optionsBuilder.UseSqlServer(Configuration.GetConnectionString("db"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var hostName = "localhost:6054";
-            var threshold = new Threshold
-            {
-                ThresholdId = 1,
-                HostName = hostName,
-                MaxCalls = 10,
-                NotificationLevel = 50
-            };
-
-            modelBuilder.Entity<HostActivity>().HasData(
-                new HostActivity
-                {
-                    HostActivityId = 1,
-                    HostName = hostName,
-                    CallsMade = 0,
-                    Month = 9,
-                    Year = 2022,
-                    ThresholdId = threshold.ThresholdId
-                },
-                new HostActivity
-                {
-                    HostActivityId = 2,
-                    HostName = hostName,
-                    CallsMade = 0,
-                    Month = 10,
-                    Year = 2022,
-                    ThresholdId = threshold.ThresholdId
-                });
-
-            modelBuilder.Entity<Threshold>().HasData(threshold);
-
-
-
-            modelBuilder.Entity<HostActivity>()
-                .HasOne(x => x.Threshold)
-                .WithMany(x => x.HostActivities);
+            modelBuilder.ApplyConfiguration(new HostActivityConfiguration());
+            modelBuilder.ApplyConfiguration(new ThresholdConfiguration());
+            
+            modelBuilder.SeedDefaultDataToDb();
         }
 
         public virtual DbSet<Threshold> Thresholds { get; set; }

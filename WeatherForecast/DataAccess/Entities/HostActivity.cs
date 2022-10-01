@@ -4,7 +4,6 @@ namespace DataAccess.Entities;
 
 public class HostActivity
 {
-    [Key]
     public long HostActivityId { get; set; }
 
     [Range(1,12)]
@@ -12,10 +11,8 @@ public class HostActivity
 
     public long Year { get; set; }
 
-    [Required]
     public string HostName { get; set; }
 
-    [Required]
     public long CallsMade { get; set; }
 
     public long ThresholdId { get; set; }
