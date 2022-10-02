@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Messages;
+using System.Net;
 using System.Net.Mail;
 
 namespace AlertSender
@@ -25,12 +26,17 @@ namespace AlertSender
             };
         }
 
-        public void SendAlert(string hostName)
+        public void SendAlert(AlertMessage alertMessage)
         {
+            var messageBody = $"Dear {alertMessage.UserFirstName} {alertMessage.UserLastName}, " +
+                $"your API calss threshold for username {alertMessage.UserName} to host {alertMessage.RequestedHost} " +
+                $"is reached {alertMessage.Percentage} percent of {alertMessage.CallLimit} call limit for your mounthly subscription." +
+                $"\r\nPlease contact your administrator";
+
             using var message = new MailMessage(fromAddress, toAddress)
             {
                 Subject = subject,
-                Body = $"You reached your threshold to host: {hostName}! Please contact your administrator"
+                Body = messageBody
             };
             _mailClient.Send(message);
         }

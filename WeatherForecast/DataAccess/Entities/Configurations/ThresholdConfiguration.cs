@@ -15,13 +15,16 @@ namespace DataAccess.Entities.Configurations
             builder.Property(x => x.MaxCalls)
             .IsRequired();
 
+            builder.HasIndex(x => x.UserIdId);
+
             builder.HasMany(t => t.HostActivities)
                 .WithOne(h => h.Threshold)
                 .HasForeignKey(h => h.ThresholdId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(t => t.User)
-                .WithMany(u => u.Thresholds);
+                .WithMany(u => u.Thresholds)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

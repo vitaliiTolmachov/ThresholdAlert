@@ -42,7 +42,6 @@ namespace DataAccess
                    new HostActivity
                    {
                        HostActivityId = 1,
-                       HostName = hostName,
                        CallsMade = 0,
                        Month = 9,
                        Year = 2022,
@@ -52,7 +51,6 @@ namespace DataAccess
                    new HostActivity
                    {
                        HostActivityId = 2,
-                       HostName = hostName,
                        CallsMade = 0,
                        Month = 10,
                        Year = 2022,

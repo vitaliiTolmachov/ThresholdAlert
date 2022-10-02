@@ -29,6 +29,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auth", "Auth", "{74D04AF6-8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentification", "Authentification\Authentification.csproj", "{6DB0DA13-FED5-44C6-B0B9-45FD3F5950E9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{8E58BDA1-4A3F-4D93-BBA4-DC3D5F1A2A0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages", "Messages\Messages.csproj", "{A98F6A85-4E42-40F6-B068-1AA9CB681C87}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,10 @@ Global
 		{6DB0DA13-FED5-44C6-B0B9-45FD3F5950E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DB0DA13-FED5-44C6-B0B9-45FD3F5950E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DB0DA13-FED5-44C6-B0B9-45FD3F5950E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A98F6A85-4E42-40F6-B068-1AA9CB681C87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A98F6A85-4E42-40F6-B068-1AA9CB681C87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A98F6A85-4E42-40F6-B068-1AA9CB681C87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A98F6A85-4E42-40F6-B068-1AA9CB681C87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +83,7 @@ Global
 		{F9F60CBE-0A02-4752-A147-E97F782E6EAE} = {F6CC59A7-C775-4F48-B2CC-7DE09383A417}
 		{11C86F79-D609-470A-8D2D-4269C323E303} = {4FF58268-5CEA-497B-B9C6-5EDCCBB8239F}
 		{6DB0DA13-FED5-44C6-B0B9-45FD3F5950E9} = {74D04AF6-87EE-4034-85BD-2D402DADD311}
+		{A98F6A85-4E42-40F6-B068-1AA9CB681C87} = {8E58BDA1-4A3F-4D93-BBA4-DC3D5F1A2A0B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D8BDC44-C9EE-40E1-8162-F953E5A9BC26}

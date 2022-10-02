@@ -1,5 +1,7 @@
 ﻿using Azure.Messaging.ServiceBus;
+using Messages;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using DbContext = DataAccess.DbContext;
 
 namespace RequestInterceptor
@@ -25,9 +27,16 @@ namespace RequestInterceptor
 
         public async Task TrackActivityAsync(string hostName, long userId)
         {
+            var threshold = await _dbContext.Thresholds.AsNoTracking()
+                .FirstOrDefaultAsync(x => x.HostName == hostName &&
+                                     x.UserIdId == userId);
+            //TODO: Business logic exception should be raised
+            if (threshold == null)
+                return;
+
             var now = DateTime.UtcNow;
             var hostActivity = await _dbContext.HostActivities
-                .FirstAsync(x => x.HostName == hostName &&
+                .FirstAsync(x => x.ThresholdId == threshold.ThresholdId &&
                                  x.Month == now.Month &&
                                  x.Year == now.Year &&
                                  x.UserId == userId)
@@ -53,10 +62,21 @@ namespace RequestInterceptor
             if (threshold.IsAlertSent || currentPercentage < threshold.NotificationLevel)
                 return;
 
-            await using (var sender = _client.CreateSender(queueName))
-            {              
+            var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == threshold.UserIdId);
 
-                var message = new ServiceBusMessage(threshold.HostName);
+            await using (var sender = _client.CreateSender(queueName))
+            {
+                var messageBody = new AlertMessage
+                {
+                    UserFirstName = user.FirstName,
+                    UserLastName = user.LastName,
+                    UserName = user.Username,
+                    RequestedHost = threshold.HostName,
+                    Percentage = threshold.NotificationLevel,
+                    CallLimit = threshold.MaxCalls
+                };
+                var json = JsonConvert.SerializeObject(messageBody);
+                var message = new ServiceBusMessage(json);
 
                 // send the message
                 await sender.SendMessageAsync(message).ConfigureAwait(false);

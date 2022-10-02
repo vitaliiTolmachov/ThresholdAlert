@@ -11,8 +11,6 @@ public class HostActivity
 
     public long Year { get; set; }
 
-    public string HostName { get; set; }
-
     public long CallsMade { get; set; }
 
     public long ThresholdId { get; set; }

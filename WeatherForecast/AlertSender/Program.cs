@@ -1,4 +1,6 @@
 ﻿using Azure.Messaging.ServiceBus;
+using Messages;
+using Newtonsoft.Json;
 
 namespace AlertSender
 {
@@ -20,9 +22,10 @@ namespace AlertSender
         // handle received messages
         static async Task MessageHandler(ProcessMessageEventArgs args)
         {
-            string hostName = args.Message.Body.ToString();
+            string json = args.Message.Body.ToString();
+            var alertMessage = JsonConvert.DeserializeObject<AlertMessage>(json);
             var mailSender = new MailSender();
-            mailSender.SendAlert(hostName);
+            mailSender.SendAlert(alertMessage);
 
             // complete the message. message is deleted from the queue. 
             await args.CompleteMessageAsync(args.Message);

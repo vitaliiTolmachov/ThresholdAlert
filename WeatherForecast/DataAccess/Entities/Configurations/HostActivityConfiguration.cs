@@ -9,9 +9,6 @@ namespace DataAccess.Entities.Configurations
         {
             builder.HasKey(x => x.HostActivityId);
 
-            builder.Property(x => x.HostName)
-                .IsRequired();
-
             builder.Property(x => x.Month)
                 .IsRequired();
 
@@ -22,13 +19,14 @@ namespace DataAccess.Entities.Configurations
                 .IsRequired();
 
 
-            builder.HasIndex(x => x.HostName);
             builder.HasIndex(x => x.Month);
             builder.HasIndex(x => x.Year);
             builder.HasIndex(x => x.UserId);
+            builder.HasIndex(x => x.ThresholdId);
 
             builder.HasOne(x => x.Threshold)
-                .WithMany(x => x.HostActivities);
+                .WithMany(x => x.HostActivities)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 
