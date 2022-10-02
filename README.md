@@ -9,12 +9,13 @@
 
 ## SetUp
 1. Pull the code and build it
-2. Set DataAccess as startup project. Than in Package Management choose DataAccess as Default project and type:
+2. Set connection string to your database in dbSettings.json
+3. Set DataAccess as startup project. Than in Package Management choose DataAccess as Default project and type:
 
 ```sh
 Update-Database -v
 ```
-3. Select multiple starup projects:
+4. Select multiple starup projects:
 - AlertManagmentAPI (allows you to add a threshold for a particular user and web host it consumes)
 - WeatherForecastAPI (simple API to imitate host workload)
 - AlertSender (responsible to send email notification)
