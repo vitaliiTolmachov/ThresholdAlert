@@ -1,5 +1,6 @@
 using Authentification.Middleware;
 using CustomAuthentification;
+using DataAccess.Extension;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.RegisterDbContext();
 builder.Services.AddCustomAuthorization();
 
 var app = builder.Build();
