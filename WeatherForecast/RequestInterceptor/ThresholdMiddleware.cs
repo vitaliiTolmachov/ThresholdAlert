@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Authentification.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace RequestInterceptor
 {
@@ -18,7 +19,10 @@ namespace RequestInterceptor
         {
             await _next(httpContext).ConfigureAwait(false);
 
-            await service.TrackActivityAsync(httpContext.Request.Host.Value).ConfigureAwait(false);
+            var user = (User)httpContext.Items["User"];
+            if (user == null) return;
+
+            await service.TrackActivityAsync(httpContext.Request.Host.Value, user.Id).ConfigureAwait(false);
 
         }
 

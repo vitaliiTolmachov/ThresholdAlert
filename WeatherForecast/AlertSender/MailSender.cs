@@ -8,7 +8,7 @@ namespace AlertSender
         private readonly SmtpClient _mailClient;
         private readonly MailAddress fromAddress = new("alerts.notifications.api@gmail.com", "John Doe");
         private readonly MailAddress toAddress = new("v.tolmachov@gmail.com", "Admin");
-        const string fromPassword = "fkiwectccvdxjjmk";
+        const string fromPassword = "shvouznihplqgzle";
         const string subject = "Threshold reached";
 
         //TODO: Move to settings

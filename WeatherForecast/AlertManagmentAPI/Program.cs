@@ -1,19 +1,18 @@
-using RequestInterceptor;
-using CustomAuthentification;
 using Authentification.Middleware;
+using CustomAuthentification;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
 builder.Services.AddCors();
-// Add services to the container
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddThresholdMiddleware();
+
 builder.Services.AddCustomAuthorization();
 
-WebApplication app = builder.Build();
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -28,9 +27,8 @@ app.UseCors(x => x
     .AllowAnyMethod()
     .AllowAnyHeader());
 
-app.MapControllers();
 app.UseMiddleware<BasicAuthMiddleware>();
-app.UseMiddleware<ThresholdMiddleware>();
 
-//TODO: Move to constants
-app.Run("http://localhost:6054");
+app.MapControllers();
+
+app.Run();

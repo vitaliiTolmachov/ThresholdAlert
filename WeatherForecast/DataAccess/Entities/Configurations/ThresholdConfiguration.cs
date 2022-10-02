@@ -19,6 +19,9 @@ namespace DataAccess.Entities.Configurations
                 .WithOne(h => h.Threshold)
                 .HasForeignKey(h => h.ThresholdId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(t => t.User)
+                .WithMany(u => u.Thresholds);
         }
     }
 }

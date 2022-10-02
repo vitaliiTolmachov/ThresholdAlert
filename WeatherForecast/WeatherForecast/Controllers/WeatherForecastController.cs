@@ -1,7 +1,9 @@
+using Authentification.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WeatherForecast.Controllers
 {
+    [CutsomAuthorizeAttribute]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase

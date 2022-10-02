@@ -1,6 +1,5 @@
 ﻿using DataAccess.Entities;
 using DataAccess.Entities.Configurations;
-using DataAccess.Extension;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
@@ -30,9 +29,12 @@ namespace DataAccess
         {
             modelBuilder.ApplyConfiguration(new HostActivityConfiguration());
             modelBuilder.ApplyConfiguration(new ThresholdConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
             
             modelBuilder.SeedDefaultDataToDb();
         }
+
+        public virtual DbSet<User> Users { get; set; }
 
         public virtual DbSet<Threshold> Thresholds { get; set; }
 

@@ -26,11 +26,5 @@ namespace RequestInterceptor
             services.RegisterDbContext();
             return services;
         }
-
-        public static IApplicationBuilder UseThresholdMiddleware(
-            this IApplicationBuilder builder)
-        {
-            return builder.UseMiddleware<ThresholdMiddleware>();
-        }
     }
 }

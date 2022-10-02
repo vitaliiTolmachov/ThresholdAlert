@@ -6,7 +6,7 @@ namespace RequestInterceptor
 {
     public interface IAlertService
     {
-        Task TrackActivityAsync(string hostName);
+        Task TrackActivityAsync(string hostName, long userId);
     }
 
     internal class AlertService : IAlertService
@@ -23,13 +23,14 @@ namespace RequestInterceptor
             _dbContext = dbContext;
         }
 
-        public async Task TrackActivityAsync(string hostName)
+        public async Task TrackActivityAsync(string hostName, long userId)
         {
             var now = DateTime.UtcNow;
             var hostActivity = await _dbContext.HostActivities
                 .FirstAsync(x => x.HostName == hostName &&
                                  x.Month == now.Month &&
-                                 x.Year == now.Year)
+                                 x.Year == now.Year &&
+                                 x.UserId == userId)
                 .ConfigureAwait(false);
 
             hostActivity.CallsMade++;
@@ -41,7 +42,6 @@ namespace RequestInterceptor
         private async Task CheckThresholdAsync(long thresholdId, long callsMade)
         {
             var threshold = await _dbContext.Thresholds
-                .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.ThresholdId == thresholdId)
                 .ConfigureAwait(false);
 
@@ -50,7 +50,7 @@ namespace RequestInterceptor
 
             var currentPercentage = callsMade * 100 / threshold.MaxCalls;
 
-            if (currentPercentage < threshold.NotificationLevel)
+            if (threshold.IsAlertSent || currentPercentage < threshold.NotificationLevel)
                 return;
 
             await using (var sender = _client.CreateSender(queueName))
@@ -59,7 +59,10 @@ namespace RequestInterceptor
                 var message = new ServiceBusMessage(threshold.HostName);
 
                 // send the message
-                await sender.SendMessageAsync(message).ConfigureAwait(false); 
+                await sender.SendMessageAsync(message).ConfigureAwait(false);
+
+                threshold.IsAlertSent = true;
+                await _dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }
     }

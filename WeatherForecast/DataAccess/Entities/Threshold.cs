@@ -13,6 +13,12 @@ namespace DataAccess.Entities
         [Range(1, 100)]
         public int NotificationLevel { get; set; }
 
+        public long UserIdId { get; set; }
+
+        public User User { get; set; }
+
+        public bool IsAlertSent { get; set; }
+
         public ICollection<HostActivity> HostActivities { get; set; }
     }
 

@@ -19,4 +19,6 @@ public class HostActivity
 
     public Threshold Threshold { get; set; }
 
+    public long UserId { get; set; }
+
 }

@@ -25,6 +25,7 @@ namespace DataAccess.Entities.Configurations
             builder.HasIndex(x => x.HostName);
             builder.HasIndex(x => x.Month);
             builder.HasIndex(x => x.Year);
+            builder.HasIndex(x => x.UserId);
 
             builder.HasOne(x => x.Threshold)
                 .WithMany(x => x.HostActivities);
