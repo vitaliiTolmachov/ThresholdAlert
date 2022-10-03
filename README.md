@@ -15,10 +15,12 @@
 ```sh
 Update-Database -v
 ```
+Database seed with test data will be provided
 4. Select multiple starup projects:
 - AlertManagmentAPI (allows you to add a threshold for a particular user and web host it consumes)
 - WeatherForecastAPI (simple API to imitate host workload)
 - AlertSender (responsible to send email notification)
+If you need to reach endpoint with authentication, use login/password test/test provided in database seed
 
 ## License
 
